@@ -1,0 +1,18 @@
+Package: ExtremesbyDegree
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Tony","Gardella",
+                     email   = "agardella@indecon.com",
+                     role    = c("aut","cre"),
+                     comment = c(ORCID = "0000-0003-4380-3412",
+                                 github = "tonygard-indecon"))
+     )
+Description: What the package does (one paragraph).
+License: `use_mit_license()`
+    license
+Depends: R (>= 4.2.0),
+    tidyverse
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
