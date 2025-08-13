@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_extreme_impact.R
 \name{run_extreme_impact}
 \alias{run_extreme_impact}
-\title{Title}
+\title{run_extreme_impact}
 \usage{
 run_extreme_impact(inputsList = c(temp = NULL))
 }
@@ -10,5 +10,5 @@ run_extreme_impact(inputsList = c(temp = NULL))
 \item{inputsList}{}
 }
 \description{
-Title
+run_extreme_impact
 }

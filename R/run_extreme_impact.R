@@ -1,5 +1,5 @@
 
-#' Title
+#' run_extreme_impact
 #'
 #' @param inputsList 
 #'
@@ -36,23 +36,15 @@ run_extreme_impact <- function(
     temp_dat <- inputsList$temp
   }
   
-  #### Create scaled impact functions #######
+  #### 3. Create scaled impact functions and evaluate #######
   
-  imp_model <- function(df) {
-    approxfun(x = df$modelUnitValue, y = df$value)
-  }
-  
-  imp_func_nest <- scaled_Imp |> 
-    group_by(state,postal,impactType,model,sector) |>
-    group_modify(~ add_row(.x, modelUnitValue = 0,value = 0)) |> 
-    nest()
-   
-  imp_Data <- imp_func_nest |>
-              mutate(func = map(data,imp_model))
-  
-    
-  ##### 3. Evaluate 
-  temp_scaled_imp <- imp_Data |>
+
+  temp_scaled_imp <- scaled_Imp |> 
+    group_by(state,postal,sector,variant,impactType,impactYear,model) |>
+    group_modify(~ add_row(.x, modelUnitValue = 0,value = 0)) |>
+    group_modify(~ add_linear_row(.x)) |>
+    nest() |>
+    mutate(func = map(data,imp_model)) |>
     select(-data) |> 
     cross_join(temp_dat) |>
     ungroup() |>
