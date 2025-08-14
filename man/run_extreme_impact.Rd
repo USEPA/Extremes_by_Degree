@@ -4,7 +4,7 @@
 \alias{run_extreme_impact}
 \title{run_extreme_impact}
 \usage{
-run_extreme_impact(inputsList = c(temp = NULL))
+run_extreme_impact(inputsList = c(temp = NULL), agg_impacts = TRUE)
 }
 \arguments{
 \item{inputsList}{}

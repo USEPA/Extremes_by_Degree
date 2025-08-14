@@ -6,7 +6,8 @@
 #' @export
 #'
 run_extreme_impact <- function(
-    inputsList = c(temp = NULL)
+    inputsList = c(temp = NULL), # List of inputs.
+    agg_impacts = TRUE # Whether to take model average or not
 ){
   
   ##### 1. Setup #####
@@ -39,7 +40,7 @@ run_extreme_impact <- function(
   #### 3. Create scaled impact functions and evaluate #######
   
 
-  temp_scaled_imp <- scaled_Imp |> 
+  result <- scaled_Imp |> 
     group_by(state,postal,sector,variant,impactType,impactYear,model) |>
     group_modify(~ add_row(.x, modelUnitValue = 0,value = 0)) |>
     group_modify(~ add_linear_row(.x)) |>
@@ -54,7 +55,17 @@ run_extreme_impact <- function(
     ) |> 
     select(-func)
   
-  return(temp_scaled_imp)
+  #### 4. Aggregation ###########
+  
+  if(agg_impacts){
+  result <- result |> 
+                      group_by(state,postal,sector,variant,impactType,impactYear,year) |>
+                      summarize(
+                        annual_impact = mean(annual_impact)
+                      )
+  }
+  
+  return(result)
   
 }
   
