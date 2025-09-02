@@ -1,8 +1,8 @@
 
 #' run_extreme_impact
 #'
-#' @param inputsList 
-#'
+#' @param inputsList=list(temp=NULL) A list with named elements (`temp`), containing data frame of a custom scenario of temperature changes (°C) relative to 2010
+#' @param agg_impacts Boolean (`T/F`) that determines whether or not to aggregate results as an average across GCM models
 #' @export
 #'
 run_extreme_impact <- function(
@@ -55,14 +55,17 @@ run_extreme_impact <- function(
     ) |> 
     select(-func)
   
+
+  
   #### 4. Aggregation ###########
   
   if(agg_impacts){
   result <- result |> 
-                      group_by(state,postal,sector,variant,impactType,impactYear,year) |>
+    group_by(state,postal,sector,variant,impactType,impactYear,year) |>
                       summarize(
                         annual_impact = mean(annual_impact)
                       )
+
   }
   
   return(result)
