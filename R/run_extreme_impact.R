@@ -1,7 +1,7 @@
 
 #' run_extreme_impact
 #'
-#' @param inputsList=list(temp=NULL) A list with named elements (`temp`), containing data frame of a custom scenario of temperature changes (°C) relative to 2010
+#' @param inputsList=list(temp=NULL) A list with named elements (`temp`), containing data frame of a custom scenario of temperature changes (°C) relative to 2010. Dataframe for temp contains two columns: `year`,`temp_C`
 #' @param agg_impacts Boolean (`T/F`) that determines whether or not to aggregate results as an average across GCM models
 #' @export
 #'
